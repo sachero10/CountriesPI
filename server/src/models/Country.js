@@ -23,16 +23,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      // capital: {
-      //   // type: DataTypes.STRING,
-      //   type: DataTypes.ARRAY(DataTypes.STRING),
-      //   // allowNull: false,
-      // },
       capital: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        set(value) {
-          this.setDataValue("capital", value.join(", "));
-        },
+        // type: DataTypes.STRING,
+        // set(value) {
+        //   // const cap = value.join(", ");
+        //   this.setDataValue('capital', value.toString());
+        // }
       },
       subregion: {
         type: DataTypes.STRING,

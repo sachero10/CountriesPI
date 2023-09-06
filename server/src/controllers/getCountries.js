@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Activity, Country } = require("../db");
+const { Country } = require("../db");
 const { URL_BASE } = process.env;
 
 const getCountries = async (req, res) => {
@@ -19,7 +19,6 @@ const getCountries = async (req, res) => {
           population: country.population,
         });
       }
-      // console.log(countries);
       const countriesBDD = await Country.findAll();
       return res.status(200).json(countriesBDD);
     }
