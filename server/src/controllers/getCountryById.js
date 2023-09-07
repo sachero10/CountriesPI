@@ -1,5 +1,4 @@
 const { Activity, Country } = require("../db");
-const { URL_BASE } = process.env;
 const axios = require("axios");
 
 const getCountryById = async (req, res) => {

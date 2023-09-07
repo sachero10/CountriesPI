@@ -5,7 +5,6 @@ const { URL_BASE } = process.env;
 
 const getCountries = async (req, res) => {
   const { countryName } = req.query;
-  console.log(countryName);
   try {
     if (!countryName) {
       const countriesDB = await Country.findAll();
