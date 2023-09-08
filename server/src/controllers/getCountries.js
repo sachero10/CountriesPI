@@ -22,9 +22,9 @@ const getCountries = async (req, res) => {
             population: country.population,
           });
         }
-        const countriesBDD = await Country.findAll();
-        return res.status(200).json(countriesBDD);
       }
+      const countriesBDD = await Country.findAll();
+      return res.status(200).json(countriesBDD);
     } else {
       const country = await Country.findAll({
         where: { name: { [Op.iLike]: `%${countryName}%` } },
