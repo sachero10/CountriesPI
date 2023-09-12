@@ -2,12 +2,13 @@ import {
   GET_COUNTRIES,
   GET_COUNTRY_DETAIL,
   CLEAN_DETAIL,
+  GET_ACTIVITIES,
 } from "./actions";
 
 const initialState = {
   allCountries: [],
   countryDetail: {},
-  // diets: [],
+  activities: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -21,8 +22,8 @@ const rootReducer = (state = initialState, action) => {
     case CLEAN_DETAIL:
       return { ...state, countryDetail: {} };
 
-    // case GET_DIETS:
-    //   return { ...state, diets: action.payload };
+    case GET_ACTIVITIES:
+      return { ...state, activities: action.payload };
 
     default:
       return { ...state };

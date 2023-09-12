@@ -7,11 +7,11 @@ const Nav = () => {
       <Link to="/home">
         <button>Home</button>
       </Link>
-      <Link to="/detail">
-        <button>Buscar Countries</button>
+      <Link to="/activities">
+        <button>Actividades Turísticas</button>
       </Link>
       <Link to="/form">
-        <button>Crear Actividad</button>
+        <button>Crear Act. Turística</button>
       </Link>
     </div>
   );

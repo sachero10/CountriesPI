@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const GET_COUNTRIES = "GET_COUNTRIES";
-// export const GET_DIETS = "GET_DIETS";
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
@@ -23,12 +23,9 @@ export const cleanDetail = () => {
   return { type: CLEAN_DETAIL };
 };
 
-// export const getDiets = () => {
-//   return function (dispatch) {
-//     fetch("http://localhost:3001/diets")
-//       .then((response) => response.json())
-//       .then((data) =>
-//         dispatch({ type: GET_RECIPES, payload: data.map((diet) => diet.name) })
-//       );
-//   };
-// };
+export const getActivities = () => {
+  return async function (dispatch) {
+    const { data } = await axios("http://localhost:3001/activities");
+    return dispatch({ type: GET_ACTIVITIES, payload: data });
+  };
+};
