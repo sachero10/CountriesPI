@@ -6,9 +6,33 @@ const Form = () => {
     difficulty: "",
     duration: "",
     season: "",
+    // country: "",
   });
 
-  const createActivity = async () => {};
+  const createActivity = async (dataForm) => {
+    try {
+      const data = await axios
+        .post("http://localhost:3001/countries", dataForm)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      // const { data } = await axios.post(
+      //   "http://localhost:3001/countries",
+      //   dataForm,
+      //   {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   }
+      // );
+    } catch (response) {
+      const { data } = response;
+      alert(data.message);
+    }
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -20,17 +44,18 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Actividad Creada");
-    createActivity(form);
+    console.log(form);
+    // createActivity(form);
   };
 
   return (
     <div>
       <h1>Actividad Turística</h1>
-      <form onSubmit={handleSubmit} noValidate></form>
+      <form onSubmit={handleSubmit}></form>
       <fieldset>
         <legend align="left">Crear Actividad Turística</legend>
         <div>
-          <label htmlFor="name">Nombre </label>
+          <label htmlFor="name">Nombre: </label>
           <input
             type="text"
             id="name"
@@ -71,7 +96,18 @@ const Form = () => {
             <option value="Primavera">Primavera</option>
           </select>
         </div>
-        <button type="submit">CREAR</button>
+        {/* <div>
+          <label htmlFor="country">Pais: </label>
+          <input
+            type="text"
+            id="country"
+            name="country"
+            value={form.country}
+            onChange={handleChange}
+          />
+        </div> */}
+        {/* <button type="submit">CREAR</button> */}
+        <input type="submit" />
       </fieldset>
     </div>
   );
