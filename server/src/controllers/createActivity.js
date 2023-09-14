@@ -20,11 +20,11 @@ const createActivity = async (req, res) => {
     // });
     for (let pais of country) {
       const countryData = await Country.findOne({
-          where: { name: { [Op.iLike]: `%${pais}%` } },
-        });
-        if (!countryData)
-          return res.status(400).json({ error: "No existe el País" });
-        newAct.addCountries(countryData.id);
+        where: { name: { [Op.iLike]: `${pais}` } },
+      });
+      if (!countryData)
+        return res.status(400).json({ error: "No existe el País" });
+      newAct.addCountries(countryData.id);
     }
 
     // if (!countryData)
