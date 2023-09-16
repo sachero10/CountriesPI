@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 const createActivity = async (req, res) => {
   try {
     const { name, difficulty, duration, season, country } = req.body;
-    if (!name || !difficulty || !duration || !season || !country) {
+    if (!name || !difficulty || !duration || !season || country.length == 0) {
       return res.status(401).json({ error: "Faltan Datos" });
     }
     const [newAct, created] = await Activity.findOrCreate({
@@ -19,7 +19,7 @@ const createActivity = async (req, res) => {
     //   where: { name: { [Op.iLike]: `%${country}%` } },
     // });
     for (let pais of country) {
-      const countryData = await Country.findOne({
+      var countryData = await Country.findOne({
         where: { name: { [Op.iLike]: `${pais}` } },
       });
       if (!countryData)
@@ -27,10 +27,7 @@ const createActivity = async (req, res) => {
       newAct.addCountries(countryData.id);
     }
 
-    // if (!countryData)
-    //   return res.status(400).json({ error: "No existe el País" });
-    // newAct.addCountries(countryData.id);
-    return res.status(200).json(newAct);
+    if (countryData) return res.status(200).json(newAct);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
