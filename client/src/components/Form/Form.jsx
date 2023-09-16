@@ -130,7 +130,7 @@ const Form = () => {
                 ))}
               </ul>
               <br />
-              <button onClick={addArray}>Confirmar Países</button>
+              <button onClick={addArray}>Confirmar País/es</button>
             </fieldset>
           </div>
           {/* {console.log(countries)} */}
