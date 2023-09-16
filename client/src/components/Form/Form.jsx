@@ -10,6 +10,9 @@ const Form = () => {
     country: [],
   });
 
+  const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState("");
+
   const createActivity = async (dataForm) => {
     try {
       const { data } = await axios.post(
@@ -30,12 +33,23 @@ const Form = () => {
     });
   };
 
-  // const handleArray = (e) => {
-  //   setForm({
-  //     ...form,
-  //     country: [...country, e.target.value],
-  //   });
-  // };
+  const addArray = (e) => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      country: countries,
+    });
+  };
+
+  const addCountry = (e) => {
+    e.preventDefault();
+    setCountries([...countries, country]);
+  };
+
+  const removeCountries = (e) => {
+    e.preventDefault();
+    setCountries([]);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,16 +106,36 @@ const Form = () => {
               <option value="Primavera">Primavera</option>
             </select>
           </div>
+          <br />
+          <br />
           <div>
-            <label htmlFor="country">Pais: </label>
-            <input
-              type="text"
-              id="country"
-              name="country"
-              value={form.country}
-              onChange={handleChange}
-            />
+            <fieldset>
+              <legend align="left">
+                Agrega el/los paises de la Actividad uno a uno
+              </legend>
+              <label htmlFor="country">Pais: </label>
+              <input
+                type="text"
+                id="country"
+                name="country"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+              <button onClick={addCountry}>Agregar</button>
+              <button onClick={removeCountries}>Limpiar</button>
+              <hr />
+              <ul>
+                {countries.map((country, index) => (
+                  <li key={index}>{country}</li>
+                ))}
+              </ul>
+              <br />
+              <button onClick={addArray}>Confirmar Países</button>
+            </fieldset>
           </div>
+          {/* {console.log(countries)} */}
+          <br />
+          <br />
           {/* <button type="submit">CREAR</button> */}
           <input type="submit" value="CREAR" />
         </fieldset>
