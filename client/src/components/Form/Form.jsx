@@ -1,17 +1,38 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useForm } from "./useForm";
 
-const Form = () => {
-  const [form, setForm] = useState({
+const initialForm = {
     name: "",
     difficulty: "",
     duration: "",
     season: "",
     country: [],
-  });
+}
 
-  const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState("");
+const validationsForm = (form) => {
+  let errors = {}; //Objeto donde se van a ir cargando los errores de c/campo
+
+  if(!form.name.trim()){ //para eliminar los espacios en blanco en ambos extremos. Caracteres sin contenido
+    errors.name = `El campo "Nombre" no puede estar vacío`
+  }
+
+  return errors;
+}
+
+const Form = () => {
+  const {form, countries, country, errors, loading, response, handleChange, handleBlur, handleSubmit,} = useForm(initialForm, validationsForm);
+
+  // const [form, setForm] = useState({
+  //   name: "",
+  //   difficulty: "",
+  //   duration: "",
+  //   season: "",
+  //   country: [],
+  // });
+
+  // const [countries, setCountries] = useState([]);
+  // const [country, setCountry] = useState("");
 
   const createActivity = async (dataForm) => {
     try {
@@ -21,17 +42,16 @@ const Form = () => {
       );
       console.log(data);
     } catch (error) {
-      // const { data } = response;
       alert(error.message);
     }
   };
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const handleChange = (e) => {
+  //   setForm({
+  //     ...form,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   const addArray = (e) => {
     e.preventDefault();
@@ -51,12 +71,12 @@ const Form = () => {
     setCountries([]);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
-    createActivity(form);
-    alert("Actividad Creada");
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(form);
+  //   createActivity(form);
+  //   alert("Actividad Creada");
+  // };
 
   return (
     <div>
@@ -72,7 +92,10 @@ const Form = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
+              required //
+              onBlur={handleBlur}
             />
+            {errors.name && <p>{errors.name}</p>}
           </div>
           <div>
             <label htmlFor="difficulty">Dificultad (1-5): </label>
@@ -84,6 +107,8 @@ const Form = () => {
               max="5"
               value={form.difficulty}
               onChange={handleChange}
+              required //
+              onBlur={handleBlur}
             />
           </div>
           <div>
@@ -94,11 +119,12 @@ const Form = () => {
               name="duration"
               value={form.duration}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
           <div>
             <label htmlFor="season">Temporada: </label>
-            <select name="season" onChange={handleChange}>
+            <select name="season" onChange={handleChange} required onBlur={handleBlur}>
               <option value="">- - -</option>
               <option value="Verano">Verano</option>
               <option value="Otoño">Otoño</option>
@@ -120,6 +146,9 @@ const Form = () => {
                 name="country"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
+                required //
+                onBlur={handleBlur}
+
               />
               <button onClick={addCountry}>Agregar</button>
               <button onClick={removeCountries}>Limpiar</button>
