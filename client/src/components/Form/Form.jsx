@@ -110,6 +110,8 @@ const Form = () => {
               required //
               onBlur={handleBlur}
             />
+            {errors.difficulty && <p>{errors.difficulty}</p>}
+
           </div>
           <div>
             <label htmlFor="duration">Duración (hs): </label>
@@ -121,6 +123,7 @@ const Form = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
+            {errors.duration && <p>{errors.duration}</p>}
           </div>
           <div>
             <label htmlFor="season">Temporada: </label>
@@ -131,6 +134,7 @@ const Form = () => {
               <option value="Invierno">Invierno</option>
               <option value="Primavera">Primavera</option>
             </select>
+            {errors.season && <p>{errors.season}</p>}
           </div>
           <br />
           <br />
@@ -148,8 +152,8 @@ const Form = () => {
                 onChange={(e) => setCountry(e.target.value)}
                 required //
                 onBlur={handleBlur}
-
               />
+              {/* {errors.country && <p>{errors.country}</p>} */}
               <button onClick={addCountry}>Agregar</button>
               <button onClick={removeCountries}>Limpiar</button>
               <hr />
