@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountryByName, cleanCountriesByName } from "../../redux/actions";
 
 export const useForm = (initialForm, validateForm) => {
   const [form, setForm] = useState(initialForm);
@@ -8,6 +10,9 @@ export const useForm = (initialForm, validateForm) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
+
+  const dispatch = useDispatch();
+  const countriesByName = useSelector((state) => state.countriesByName);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,24 +46,36 @@ export const useForm = (initialForm, validateForm) => {
     } catch (error) {
       alert(error.message);
     }
+    setForm ({});
   };
 
   const addArray = (e) => {
     e.preventDefault();
+    const countriesSet = new Set(countries); //para eliminar los repetidos
+    const countriesResult = [...countriesSet]; //lo convierto a un Array nuevamente
+    setCountries([countriesResult]);
     setForm({
       ...form,
-      country: countries,
+      country: countriesResult,
     });
   };
 
   const addCountry = (e) => {
     e.preventDefault();
-    setCountries([...countries, country]);
+    dispatch(getCountryByName(country));
+    const found = countriesByName.find((pais) => pais.name.toUpperCase() == country.toUpperCase());
+    if (found) {
+        setCountries([...countries, found.name]);
+    } else {
+        alert(`El país ${country} no existe`);
+    }
+    dispatch(cleanCountriesByName());
   };
 
   const removeCountries = (e) => {
     e.preventDefault();
     setCountries([]);
+    setCountry("");
   };
 
   return {

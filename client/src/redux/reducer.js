@@ -3,12 +3,15 @@ import {
   GET_COUNTRY_DETAIL,
   CLEAN_DETAIL,
   GET_ACTIVITIES,
+  GET_COUNTRY_BY_NAME,
+  CLEAN_COUNTRIES_BY_NAME,
 } from "./actions";
 
 const initialState = {
   allCountries: [],
   countryDetail: {},
   activities: [],
+  countriesByName: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -24,6 +27,12 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_ACTIVITIES:
       return { ...state, activities: action.payload };
+
+    case GET_COUNTRY_BY_NAME:
+      return {...state, countriesByName: action.payload};
+    
+    case CLEAN_COUNTRIES_BY_NAME:
+      return { ...state, countriesByName: [] };
 
     default:
       return { ...state };

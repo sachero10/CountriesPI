@@ -190,6 +190,8 @@ const Form = () => {
                 onBlur={handleBlur}
               />
               {errors.country && <p>{errors.country}</p>}
+              <br />
+              <br />
               <button onClick={addCountry}>Agregar</button>
               <button onClick={removeCountries}>Limpiar</button>
               <hr />
