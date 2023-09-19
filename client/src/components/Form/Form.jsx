@@ -1,27 +1,59 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { useForm } from "./useForm";
 
 const initialForm = {
-    name: "",
-    difficulty: "",
-    duration: "",
-    season: "",
-    country: [],
-}
+  name: "",
+  difficulty: "",
+  duration: "",
+  season: "",
+  country: [],
+};
 
 const validationsForm = (form) => {
   let errors = {}; //Objeto donde se van a ir cargando los errores de c/campo
+  const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+  const regexDifficulty = /^[1-5]{1}$/;
 
-  if(!form.name.trim()){ //para eliminar los espacios en blanco en ambos extremos. Caracteres sin contenido
-    errors.name = `El campo "Nombre" no puede estar vacío`
+  if (!form.name.trim()) {
+    //para eliminar los espacios en blanco en ambos extremos. Caracteres sin contenido
+    errors.name = `El campo "Nombre" no puede estar vacío`;
+  } else if (!regexName.test(form.name.trim())) {
+    errors.name = `El campo "Nombre" sólo acepta letras y espacios en blanco`;
+  }
+
+  if (!form.difficulty.trim()) {
+    errors.difficulty = `El campo "Dificultad" no puede estar vacío`;
+  } else if (!regexDifficulty.test(form.difficulty.trim())) {
+    errors.difficulty = `El campo "Dificultad" sólo acepta un número del 1 al 5`;
+  }
+
+  if (!form.season) {
+    errors.season = `Debe Seleccionar una opción válida para la Temporada`;
+  }
+
+  if (form.country.length === 0) {
+    errors.country = `El campo "País" no puede estar vacío`;
   }
 
   return errors;
-}
+};
 
 const Form = () => {
-  const {form, countries, country, errors, loading, response, handleChange, handleBlur, handleSubmit,} = useForm(initialForm, validationsForm);
+  const {
+    form,
+    countries,
+    country,
+    errors,
+    loading,
+    response,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    addArray,
+    addCountry,
+    removeCountries,
+    setCountry,
+  } = useForm(initialForm, validationsForm);
 
   // const [form, setForm] = useState({
   //   name: "",
@@ -34,17 +66,17 @@ const Form = () => {
   // const [countries, setCountries] = useState([]);
   // const [country, setCountry] = useState("");
 
-  const createActivity = async (dataForm) => {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3001/countries",
-        dataForm
-      );
-      console.log(data);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+  // const createActivity = async (dataForm) => {
+  //   try {
+  //     const { data } = await axios.post(
+  //       "http://localhost:3001/countries",
+  //       dataForm
+  //     );
+  //     console.log(data);
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
 
   // const handleChange = (e) => {
   //   setForm({
@@ -53,23 +85,23 @@ const Form = () => {
   //   });
   // };
 
-  const addArray = (e) => {
-    e.preventDefault();
-    setForm({
-      ...form,
-      country: countries,
-    });
-  };
+  // const addArray = (e) => {
+  //   e.preventDefault();
+  //   setForm({
+  //     ...form,
+  //     country: countries,
+  //   });
+  // };
 
-  const addCountry = (e) => {
-    e.preventDefault();
-    setCountries([...countries, country]);
-  };
+  // const addCountry = (e) => {
+  //   e.preventDefault();
+  //   setCountries([...countries, country]);
+  // };
 
-  const removeCountries = (e) => {
-    e.preventDefault();
-    setCountries([]);
-  };
+  // const removeCountries = (e) => {
+  //   e.preventDefault();
+  //   setCountries([]);
+  // };
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -111,7 +143,6 @@ const Form = () => {
               onBlur={handleBlur}
             />
             {errors.difficulty && <p>{errors.difficulty}</p>}
-
           </div>
           <div>
             <label htmlFor="duration">Duración (hs): </label>
@@ -127,7 +158,12 @@ const Form = () => {
           </div>
           <div>
             <label htmlFor="season">Temporada: </label>
-            <select name="season" onChange={handleChange} required onBlur={handleBlur}>
+            <select
+              name="season"
+              onChange={handleChange}
+              required
+              onBlur={handleBlur}
+            >
               <option value="">- - -</option>
               <option value="Verano">Verano</option>
               <option value="Otoño">Otoño</option>
@@ -141,9 +177,9 @@ const Form = () => {
           <div>
             <fieldset>
               <legend align="left">
-                Agrega el/los paises de la Actividad uno a uno
+                Agrega el/los país/es de la Actividad
               </legend>
-              <label htmlFor="country">Pais: </label>
+              <label htmlFor="country">País: </label>
               <input
                 type="text"
                 id="country"
@@ -153,7 +189,7 @@ const Form = () => {
                 required //
                 onBlur={handleBlur}
               />
-              {/* {errors.country && <p>{errors.country}</p>} */}
+              {errors.country && <p>{errors.country}</p>}
               <button onClick={addCountry}>Agregar</button>
               <button onClick={removeCountries}>Limpiar</button>
               <hr />
@@ -169,7 +205,6 @@ const Form = () => {
           {/* {console.log(countries)} */}
           <br />
           <br />
-          {/* <button type="submit">CREAR</button> */}
           <input type="submit" value="CREAR" />
         </fieldset>
       </form>
