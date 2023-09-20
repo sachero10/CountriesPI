@@ -8,8 +8,6 @@ export const useForm = (initialForm, validateForm) => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("");
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState(null);
 
   const dispatch = useDispatch();
   const countriesByName = useSelector((state) => state.countriesByName);
@@ -23,17 +21,37 @@ export const useForm = (initialForm, validateForm) => {
     });
   };
 
+  const handleCountry = (e) => {
+    setCountry(e.target.value);
+    dispatch(getCountryByName(country));
+  };
+
   const handleBlur = (e) => {
     //manejador del enfoque del cursor
     handleChange(e);
-    setErrors(validateForm(form));
+    setErrors(validateForm(form, countries, country));
+  };
+
+  const handleBlurCountry = (e) => {
+    //manejador del enfoque del cursor
+    handleCountry(e);
+    setErrors(validateForm(form, countries, country));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(form);
-    createActivity(form);
-    alert("Actividad Creada");
+    setErrors(validateForm(form, countries, country));
+    if (Object.keys(errors).length === 0) {
+      //devuelve un arreglo con las propiedades del objeto
+      createActivity(form);
+      alert("Actividad Creada");
+      setForm(initialForm); //para limpiar el formulario
+      setCountry("");
+      setCountries([]);
+    } else {
+      alert("Error al Enviar el Formulario");
+      return;
+    }
   };
 
   const createActivity = async (dataForm) => {
@@ -46,14 +64,13 @@ export const useForm = (initialForm, validateForm) => {
     } catch (error) {
       alert(error.message);
     }
-    setForm ({});
   };
 
   const addArray = (e) => {
     e.preventDefault();
     const countriesSet = new Set(countries); //para eliminar los repetidos
     const countriesResult = [...countriesSet]; //lo convierto a un Array nuevamente
-    setCountries([countriesResult]);
+    setCountries(countriesResult);
     setForm({
       ...form,
       country: countriesResult,
@@ -62,20 +79,27 @@ export const useForm = (initialForm, validateForm) => {
 
   const addCountry = (e) => {
     e.preventDefault();
-    dispatch(getCountryByName(country));
-    const found = countriesByName.find((pais) => pais.name.toUpperCase() == country.toUpperCase());
+    // dispatch(getCountryByName(country));
+    const found = countriesByName.find(
+      (pais) => pais.name.toUpperCase() == country.toUpperCase()
+    ); //devuelve el valor del primer elemento del array que coincida con el nombre ingresado
     if (found) {
-        setCountries([...countries, found.name]);
+      setCountries([...countries, found.name]);
     } else {
-        alert(`El país ${country} no existe`);
+      alert(`El país ${country} no existe`);
     }
-    dispatch(cleanCountriesByName());
+    // setCountry(""); //limpio el estado local
+    dispatch(cleanCountriesByName()); //limpio el estado global
   };
 
   const removeCountries = (e) => {
     e.preventDefault();
     setCountries([]);
     setCountry("");
+    setForm({
+      ...form,
+      country: [],
+    });
   };
 
   return {
@@ -83,14 +107,13 @@ export const useForm = (initialForm, validateForm) => {
     countries,
     country,
     errors,
-    loading,
-    response,
     handleChange,
     handleBlur,
     handleSubmit,
     addArray,
     addCountry,
     removeCountries,
-    setCountry,
+    handleCountry,
+    handleBlurCountry,
   };
 };

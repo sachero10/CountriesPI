@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "./useForm";
+import styles from "./Form.module.css";
 
 const initialForm = {
   name: "",
@@ -9,13 +10,14 @@ const initialForm = {
   country: [],
 };
 
-const validationsForm = (form) => {
+const validationsForm = (form, countries, country) => {
   let errors = {}; //Objeto donde se van a ir cargando los errores de c/campo
+  //Expresiones Regulares
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexDifficulty = /^[1-5]{1}$/;
 
   if (!form.name.trim()) {
-    //para eliminar los espacios en blanco en ambos extremos. Caracteres sin contenido
+    //para eliminar los espacios en blanco en ambos extremos
     errors.name = `El campo "Nombre" no puede estar vacío`;
   } else if (!regexName.test(form.name.trim())) {
     errors.name = `El campo "Nombre" sólo acepta letras y espacios en blanco`;
@@ -31,7 +33,8 @@ const validationsForm = (form) => {
     errors.season = `Debe Seleccionar una opción válida para la Temporada`;
   }
 
-  if (form.country.length === 0) {
+  // if (!country.trim() || countries.length === 0) {
+  if (!country.trim()) {
     errors.country = `El campo "País" no puede estar vacío`;
   }
 
@@ -44,76 +47,20 @@ const Form = () => {
     countries,
     country,
     errors,
-    loading,
-    response,
     handleChange,
     handleBlur,
     handleSubmit,
     addArray,
     addCountry,
     removeCountries,
-    setCountry,
+    handleCountry,
+    handleBlurCountry,
   } = useForm(initialForm, validationsForm);
-
-  // const [form, setForm] = useState({
-  //   name: "",
-  //   difficulty: "",
-  //   duration: "",
-  //   season: "",
-  //   country: [],
-  // });
-
-  // const [countries, setCountries] = useState([]);
-  // const [country, setCountry] = useState("");
-
-  // const createActivity = async (dataForm) => {
-  //   try {
-  //     const { data } = await axios.post(
-  //       "http://localhost:3001/countries",
-  //       dataForm
-  //     );
-  //     console.log(data);
-  //   } catch (error) {
-  //     alert(error.message);
-  //   }
-  // };
-
-  // const handleChange = (e) => {
-  //   setForm({
-  //     ...form,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // const addArray = (e) => {
-  //   e.preventDefault();
-  //   setForm({
-  //     ...form,
-  //     country: countries,
-  //   });
-  // };
-
-  // const addCountry = (e) => {
-  //   e.preventDefault();
-  //   setCountries([...countries, country]);
-  // };
-
-  // const removeCountries = (e) => {
-  //   e.preventDefault();
-  //   setCountries([]);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(form);
-  //   createActivity(form);
-  //   alert("Actividad Creada");
-  // };
 
   return (
     <div>
       <h1>Actividad Turística</h1>
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit} noValidate autoComplete="off">
         <fieldset>
           <legend align="left">Crear Actividad Turística</legend>
           <div>
@@ -125,10 +72,12 @@ const Form = () => {
               value={form.name}
               onChange={handleChange}
               required //
-              onBlur={handleBlur}
+              onBlur={handleBlur} //cuando el elemento pierde el foco
             />
-            {errors.name && <p>{errors.name}</p>}
+            <br />
+            {errors.name && <span>{errors.name}</span>}
           </div>
+          <br />
           <div>
             <label htmlFor="difficulty">Dificultad (1-5): </label>
             <input
@@ -142,8 +91,10 @@ const Form = () => {
               required //
               onBlur={handleBlur}
             />
-            {errors.difficulty && <p>{errors.difficulty}</p>}
+            <br />
+            {errors.difficulty && <span>{errors.difficulty}</span>}
           </div>
+          <br />
           <div>
             <label htmlFor="duration">Duración (hs): </label>
             <input
@@ -154,8 +105,10 @@ const Form = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.duration && <p>{errors.duration}</p>}
+            <br />
+            {errors.duration && <span>{errors.duration}</span>}
           </div>
+          <br />
           <div>
             <label htmlFor="season">Temporada: </label>
             <select
@@ -170,14 +123,15 @@ const Form = () => {
               <option value="Invierno">Invierno</option>
               <option value="Primavera">Primavera</option>
             </select>
-            {errors.season && <p>{errors.season}</p>}
+            <br />
+            {errors.season && <span>{errors.season}</span>}
           </div>
           <br />
           <br />
           <div>
             <fieldset>
               <legend align="left">
-                Agrega el/los país/es de la Actividad
+                Buscar el/los país/es para la Actividad
               </legend>
               <label htmlFor="country">País: </label>
               <input
@@ -185,16 +139,17 @@ const Form = () => {
                 id="country"
                 name="country"
                 value={country}
-                onChange={(e) => setCountry(e.target.value)}
+                onChange={handleCountry}
                 required //
-                onBlur={handleBlur}
+                onBlur={handleBlurCountry}
               />
-              {errors.country && <p>{errors.country}</p>}
+              <br />
+              {errors.country && <span>{errors.country}</span>}
               <br />
               <br />
-              <button onClick={addCountry}>Agregar</button>
-              <button onClick={removeCountries}>Limpiar</button>
+              <button onClick={addCountry}>Buscar y Agregar</button>
               <hr />
+              {<h4>País/es seleccionado/s:</h4>}
               <ul>
                 {countries.map((country, index) => (
                   <li key={index}>{country}</li>
@@ -202,6 +157,7 @@ const Form = () => {
               </ul>
               <br />
               <button onClick={addArray}>Confirmar País/es</button>
+              <button onClick={removeCountries}>Limpiar</button>
             </fieldset>
           </div>
           {/* {console.log(countries)} */}
