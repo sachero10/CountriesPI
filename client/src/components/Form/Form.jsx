@@ -15,6 +15,7 @@ const validationsForm = (form, countries, country) => {
   //Expresiones Regulares
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexDifficulty = /^[1-5]{1}$/;
+  const regDurationHs=/^([0-9]|0[0-9]|1[0-9]|2[0-4])$/;
 
   if (!form.name.trim()) {
     //para eliminar los espacios en blanco en ambos extremos
@@ -29,11 +30,12 @@ const validationsForm = (form, countries, country) => {
     errors.difficulty = `El campo "Dificultad" sólo acepta un número del 1 al 5`;
   }
 
+  if(!regDurationHs.test(form.duration.trim())) errors.duration = `El campo "Duración" acepta valores del 0 al 24`
+
   if (!form.season) {
     errors.season = `Debe Seleccionar una opción válida para la Temporada`;
   }
 
-  // if (!country.trim() || countries.length === 0) {
   if (!country.trim()) {
     errors.country = `El campo "País" no puede estar vacío`;
   }

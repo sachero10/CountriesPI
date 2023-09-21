@@ -6,6 +6,7 @@ export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_COUNTRY_BY_NAME = "GET_COUNTRY_BY_NAME";
 export const CLEAN_COUNTRIES_BY_NAME = "CLEAN_COUNTRIES_BY_NAME"
+export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
 
 export const getCountries = () => {
   return async function (dispatch) {
@@ -41,4 +42,11 @@ export const getCountryByName = (name) => {
 
 export const cleanCountriesByName = () => {
   return { type: CLEAN_COUNTRIES_BY_NAME };
+};
+
+export const orderCountries = (order) => {
+  return {
+    type: ORDER_COUNTRIES,
+    payload: order,
+  };
 };

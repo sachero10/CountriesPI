@@ -10,7 +10,7 @@ export const useForm = (initialForm, validateForm) => {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-  const countriesByName = useSelector((state) => state.countriesByName);
+  const allCountries = useSelector((state) => state.allCountries);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,7 +80,7 @@ export const useForm = (initialForm, validateForm) => {
   const addCountry = (e) => {
     e.preventDefault();
     // dispatch(getCountryByName(country));
-    const found = countriesByName.find(
+    const found = allCountries.find(
       (pais) => pais.name.toUpperCase() == country.toUpperCase()
     ); //devuelve el valor del primer elemento del array que coincida con el nombre ingresado
     if (found) {

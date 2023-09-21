@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
 import Cards from "../Cards/Cards";
 import Pagination from "../Pagination/Pagination";
+import SearchBar from "../SearchBar/SearchBar";
+import Order from "../Order/Order";
 
 const Home = () => {
   const allCountries = useSelector((state) => state.allCountries);
@@ -15,10 +17,13 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getCountries());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
+      <SearchBar />
+      <Order />
+      {allCountries.length===0 ? <h3>No Existe el País...</h3> : <p></p>}
       <h1>PAISES</h1>
       <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
       <Cards pagina={pagina} porPagina={porPagina} />

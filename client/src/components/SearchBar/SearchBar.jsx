@@ -1,21 +1,21 @@
-import { useState } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { getCountries, getCountryByName } from "../../redux/actions";
 
-const SearchBar = (props) => {
-  const { onSearch } = props;
-  const [country, setCountry] = useState("");
+const SearchBar = () => {
+  const dispatch = useDispatch();
+
   const handleChange = (e) => {
-    setCountry(e.target.value);
+    if(e.target.value.trim()) {
+      dispatch(getCountryByName(e.target.value))
+    } else {
+      dispatch(getCountries());
+    };
   };
+
   return (
     <div>
-      <input type="search" onChange={handleChange} value={country} />
-      <button
-        onClick={() => {
-          onSearch(country);
-        }}
-      >
-        Buscar
-      </button>
+      <input type="search" id="countryName" name="countryName" onChange={handleChange} placeholder="Buscar País..."/>
     </div>
   );
 };

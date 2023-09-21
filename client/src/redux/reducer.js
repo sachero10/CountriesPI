@@ -5,13 +5,14 @@ import {
   GET_ACTIVITIES,
   GET_COUNTRY_BY_NAME,
   CLEAN_COUNTRIES_BY_NAME,
+  ORDER_COUNTRIES,
 } from "./actions";
 
 const initialState = {
   allCountries: [],
   countryDetail: {},
   activities: [],
-  countriesByName: [],
+  // countriesByName: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,10 +30,18 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, activities: action.payload };
 
     case GET_COUNTRY_BY_NAME:
-      return {...state, countriesByName: action.payload};
+      // return {...state, countriesByName: action.payload};
+      return {...state, allCountries: action.payload};
     
     case CLEAN_COUNTRIES_BY_NAME:
-      return { ...state, countriesByName: [] };
+      // return { ...state, countriesByName: [] };
+      return { ...state, allCountries: [] };
+
+    case ORDER_COUNTRIES:
+      let copy1 = state.allCountries.sort((a, b) => {
+        return payload === "A" ? a.name - b.name : b.name - a.name;
+      });
+      return { ...state, allCountries: copy1 };
 
     default:
       return { ...state };
