@@ -6,16 +6,23 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    if(e.target.value.trim()) {
-      dispatch(getCountryByName(e.target.value))
+    if (e.target.value.trim()) {
+      dispatch(getCountryByName(e.target.value));
     } else {
       dispatch(getCountries());
-    };
+    }
   };
 
   return (
     <div>
-      <input type="search" id="countryName" name="countryName" onChange={handleChange} placeholder="Buscar País..."/>
+      <input
+        type="search"
+        id="countryName"
+        name="countryName"
+        onChange={handleChange}
+        placeholder="Buscar País..."
+        autoComplete="off"
+      />
     </div>
   );
 };

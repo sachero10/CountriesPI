@@ -31,15 +31,36 @@ const rootReducer = (state = initialState, action) => {
 
     case GET_COUNTRY_BY_NAME:
       // return {...state, countriesByName: action.payload};
-      return {...state, allCountries: action.payload};
-    
+      return { ...state, allCountries: action.payload };
+
     case CLEAN_COUNTRIES_BY_NAME:
       // return { ...state, countriesByName: [] };
       return { ...state, allCountries: [] };
 
     case ORDER_COUNTRIES:
+      // let copy1 = state.allCountries.sort((a, b) => {
+      //   return action.payload === "A" ? a.name - b.name : b.name - a.name;
+      // });
       let copy1 = state.allCountries.sort((a, b) => {
-        return payload === "A" ? a.name - b.name : b.name - a.name;
+        if (action.payload === "A") {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        } else {
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+          // a must be equal to b
+          return 0;
+        }
       });
       return { ...state, allCountries: copy1 };
 

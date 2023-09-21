@@ -5,7 +5,7 @@ export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_COUNTRY_BY_NAME = "GET_COUNTRY_BY_NAME";
-export const CLEAN_COUNTRIES_BY_NAME = "CLEAN_COUNTRIES_BY_NAME"
+export const CLEAN_COUNTRIES_BY_NAME = "CLEAN_COUNTRIES_BY_NAME";
 export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
 
 export const getCountries = () => {
@@ -35,10 +35,12 @@ export const getActivities = () => {
 
 export const getCountryByName = (name) => {
   return async function (dispatch) {
-    const {data} = await axios (`http://localhost:3001/countries?countryName=${name}`);
-    return dispatch ({type: GET_COUNTRY_BY_NAME, payload: data });
-  }
-}
+    const { data } = await axios(
+      `http://localhost:3001/countries?countryName=${name}`
+    );
+    return dispatch({ type: GET_COUNTRY_BY_NAME, payload: data });
+  };
+};
 
 export const cleanCountriesByName = () => {
   return { type: CLEAN_COUNTRIES_BY_NAME };
