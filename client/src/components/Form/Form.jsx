@@ -84,8 +84,6 @@ const Form = () => {
               type="number"
               id="difficulty"
               name="difficulty"
-              min="1"
-              max="5"
               value={form.difficulty}
               onChange={handleChange}
               required //
@@ -133,6 +131,7 @@ const Form = () => {
               <legend align="left">
                 Buscar el/los país/es para la Actividad
               </legend>
+              <br />
               <label htmlFor="country">País: </label>
               <input
                 type="text"
@@ -157,13 +156,13 @@ const Form = () => {
               </ul>
               <br />
               <button onClick={addArray}>Confirmar País/es</button>
-              <button onClick={removeCountries}>Limpiar</button>
+              <button onClick={removeCountries}>Eliminar Seleccion</button>
             </fieldset>
           </div>
           {/* {console.log(countries)} */}
           <br />
           <br />
-          <input type="submit" value="CREAR" />
+          <input type="submit" value="CREAR ACTIVIDAD" />
         </fieldset>
       </form>
     </div>
