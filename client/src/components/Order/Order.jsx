@@ -2,11 +2,12 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { orderCountries, getCountries } from "../../redux/actions";
 
-const Order = () => {
+const Order = ({allCountries}) => {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     dispatch(orderCountries(e.target.value));
+    console.log(allCountries);
   };
 
   return (

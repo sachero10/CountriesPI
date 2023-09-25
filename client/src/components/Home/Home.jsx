@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [pagina, setPagina] = useState(1); //pag actual
-  const [porPagina, setPorPagina] = useState(10); //cant de paises p/pag
+  const porPagina = 10; //cant de paises p/pag
 
   const maximo = Math.ceil(allCountries.length / porPagina); //cant de pags
 
@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div>
       <SearchBar />
-      <Order />
+      <Order allCountries={allCountries}/>
       {allCountries.length===0 ? <h3>No Existe el País...</h3> : <p></p>}
       <h1>PAISES</h1>
       <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
