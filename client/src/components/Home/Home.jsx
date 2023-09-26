@@ -5,6 +5,7 @@ import Cards from "../Cards/Cards";
 import Pagination from "../Pagination/Pagination";
 import SearchBar from "../SearchBar/SearchBar";
 import Order from "../Order/Order";
+import Filter from "../Filter/Filter";
 
 const Home = () => {
   const allCountries = useSelector((state) => state.allCountries);
@@ -22,8 +23,9 @@ const Home = () => {
   return (
     <div>
       <SearchBar />
-      <Order allCountries={allCountries}/>
-      {allCountries.length===0 ? <h3>No Existe el País...</h3> : <p></p>}
+      <Order allCountries={allCountries} />
+      <Filter />
+      {allCountries.length === 0 ? <h3>No Existe el País...</h3> : <p></p>}
       <h1>PAISES</h1>
       <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
       <Cards pagina={pagina} porPagina={porPagina} />

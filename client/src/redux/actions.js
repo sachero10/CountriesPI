@@ -7,6 +7,8 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_COUNTRY_BY_NAME = "GET_COUNTRY_BY_NAME";
 export const CLEAN_COUNTRIES_BY_NAME = "CLEAN_COUNTRIES_BY_NAME";
 export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
+export const ORDER_POPULATION = "ORDER_POPULATION";
+export const FILTER_CONTINENT = "FILTER_CONTINENT";
 
 export const getCountries = () => {
   return async function (dispatch) {
@@ -50,5 +52,19 @@ export const orderCountries = (order) => {
   return {
     type: ORDER_COUNTRIES,
     payload: order,
+  };
+};
+
+export const orderCountriesByPopulation = (order) => {
+  return {
+    type: ORDER_POPULATION,
+    payload: order,
+  };
+};
+
+export const filterByContinent = (continent) => {
+  return {
+    type: FILTER_CONTINENT,
+    payload: continent,
   };
 };

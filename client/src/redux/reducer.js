@@ -6,6 +6,8 @@ import {
   GET_COUNTRY_BY_NAME,
   CLEAN_COUNTRIES_BY_NAME,
   ORDER_COUNTRIES,
+  ORDER_POPULATION,
+  FILTER_CONTINENT,
 } from "./actions";
 
 const initialState = {
@@ -63,6 +65,20 @@ const rootReducer = (state = initialState, action) => {
         }
       });
       return { ...state, allCountries: copy1 };
+
+    case ORDER_POPULATION:
+      let copy2 = state.allCountries.sort((a, b) => {
+        return action.payload === "AP"
+          ? a.population - b.population
+          : b.population - a.population;
+      });
+      return { ...state, allCountries: copy2 };
+
+    case FILTER_CONTINENT:
+      let copy3 = state.allCountries.filter((country) => {
+        return country.continent === action.payload;
+      });
+      return { ...state, allCountries: copy3 };
 
     default:
       return { ...state };
