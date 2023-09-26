@@ -1,26 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   orderCountries,
   orderCountriesByPopulation,
+  getCountries
 } from "../../redux/actions";
 
 const Order = ({ allCountries }) => {
   const dispatch = useDispatch();
 
   const handleChangeName = (e) => {
-    dispatch(orderCountries(e.target.value));
-    console.log(allCountries);
+    if (e.target.value.trim()) {
+      dispatch(orderCountries(e.target.value));
+      console.log(allCountries); //
+    } else {
+      dispatch(getCountries());
+    }
   };
 
   const handleChangePopulation = (e) => {
-    dispatch(orderCountriesByPopulation(e.target.value));
-    console.log(allCountries);
+    if (e.target.value.trim()) {
+      dispatch(orderCountriesByPopulation(e.target.value));
+      console.log(allCountries); //
+    } else {
+      dispatch(getCountries());
+    }
   };
-
-  // useEffect(() => {
-  //   console.log(allCountries);
-  // }, [dispatch]);
 
   return (
     <div>
@@ -28,22 +33,22 @@ const Order = ({ allCountries }) => {
         <legend align="left">Ordenar Países</legend>
         <fieldset>
           <legend>Por Nombre</legend>
-          <div onChange={handleChangeName}>
-            <input type="radio" id="asc" name="order" value="A" />
-            <label htmlFor="asc">Ascendentemente</label>
-
-            <input type="radio" id="desc" name="order" value="D" />
-            <label htmlFor="desc">Descendentemente</label>
+          <div>
+            <select onChange={handleChangeName}>
+              <option value="">--------</option>
+              <option value="AN">Ascendente</option>
+              <option value="DN">Descendente</option>
+            </select>
           </div>
         </fieldset>
         <fieldset>
           <legend>Por Poblacion</legend>
-          <div onChange={handleChangePopulation}>
-            <input type="radio" id="asc" name="order" value="AP" />
-            <label htmlFor="asc">Ascendentemente</label>
-
-            <input type="radio" id="desc" name="order" value="DP" />
-            <label htmlFor="desc">Descendentemente</label>
+          <div>
+          <select onChange={handleChangePopulation}>
+              <option value="">--------</option>
+              <option value="AP">Ascendente</option>
+              <option value="DP">Descendente</option>
+            </select>
           </div>
         </fieldset>
       </fieldset>

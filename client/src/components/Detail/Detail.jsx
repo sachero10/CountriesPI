@@ -13,7 +13,7 @@ const Detail = () => {
     return () => {
       dispatch(cleanDetail()); //cuando se desmonta el componente
     };
-  }, [id, dispatch]); //cuando se actualiza
+  }, [id ]); //cuando se actualiza
 
   return (
     <div>

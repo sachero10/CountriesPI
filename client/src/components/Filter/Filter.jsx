@@ -1,12 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { filterByContinent } from "../../redux/actions";
+import { filterByContinent, getCountries, cleanCountriesByName } from "../../redux/actions";
 
 const Filter = () => {
   const dispatch = useDispatch();
 
   const handleFilterByContinent = (e) => {
-    dispatch(filterByContinent(e.target.value));
+    if (e.target.value.trim()) {
+      dispatch(filterByContinent(e.target.value));
+    } else {
+      dispatch(getCountries());
+    }
+    // console.log(e.target.value);
   };
 
   return (

@@ -14,13 +14,14 @@ const initialState = {
   allCountries: [],
   countryDetail: {},
   activities: [],
+  aux: [],
   // countriesByName: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COUNTRIES:
-      return { ...state, allCountries: action.payload };
+      return { ...state, aux: action.payload, allCountries: action.payload };
 
     case GET_COUNTRY_DETAIL:
       return { ...state, countryDetail: action.payload };
@@ -40,18 +41,14 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allCountries: [] };
 
     case ORDER_COUNTRIES:
-      // let copy1 = state.allCountries.sort((a, b) => {
-      //   return action.payload === "A" ? a.name - b.name : b.name - a.name;
-      // });
       let copy1 = state.allCountries.sort((a, b) => {
-        if (action.payload === "A") {
+        if (action.payload === "AN") {
           if (a.name > b.name) {
             return 1;
           }
           if (a.name < b.name) {
             return -1;
           }
-          // a must be equal to b
           return 0;
         } else {
           if (a.name > b.name) {
@@ -60,7 +57,6 @@ const rootReducer = (state = initialState, action) => {
           if (a.name < b.name) {
             return 1;
           }
-          // a must be equal to b
           return 0;
         }
       });
@@ -75,7 +71,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allCountries: copy2 };
 
     case FILTER_CONTINENT:
-      let copy3 = state.allCountries.filter((country) => {
+      let copy3 = state.aux.filter((country) => {
         return country.continent === action.payload;
       });
       return { ...state, allCountries: copy3 };

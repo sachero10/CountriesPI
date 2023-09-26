@@ -48,23 +48,29 @@ export const cleanCountriesByName = () => {
   return { type: CLEAN_COUNTRIES_BY_NAME };
 };
 
-export const orderCountries = (order) => {
-  return {
-    type: ORDER_COUNTRIES,
-    payload: order,
-  };
+export const orderCountries = (orderC) => {
+  return function (dispatch) {
+    return dispatch ({
+      type: ORDER_COUNTRIES,
+      payload: orderC,
+    });
+  }
 };
 
-export const orderCountriesByPopulation = (order) => {
-  return {
-    type: ORDER_POPULATION,
-    payload: order,
-  };
+export const orderCountriesByPopulation = (orderP) => {
+  return function (dispatch) {
+    return dispatch ({
+      type: ORDER_POPULATION,
+      payload: orderP,
+    });
+  }
 };
 
 export const filterByContinent = (continent) => {
-  return {
-    type: FILTER_CONTINENT,
-    payload: continent,
-  };
+  return async function (dispatch) {
+    return dispatch ({
+      type: FILTER_CONTINENT,
+      payload: continent,
+    });
+  }
 };

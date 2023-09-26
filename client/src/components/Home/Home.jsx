@@ -18,15 +18,15 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getCountries());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
       <SearchBar />
       <Order allCountries={allCountries} />
       <Filter />
-      {allCountries.length === 0 ? <h3>No Existe el País...</h3> : <p></p>}
       <h1>PAISES</h1>
+      {allCountries.length === 0 ? <h3>No Existe el País...</h3> : <p></p>}
       <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
       <Cards pagina={pagina} porPagina={porPagina} />
     </div>
