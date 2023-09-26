@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterByContinent, getCountries, cleanCountriesByName } from "../../redux/actions";
+import {
+  filterByContinent,
+  getCountries,
+  filterByActivities,
+} from "../../redux/actions";
 
-const Filter = () => {
+const Filter = ({ auxActivities }) => {
+  const [auxAct, setAuxAct] = useState([]);
+
+  useEffect(() => {
+    setAuxAct(auxActivities);
+    console.log(auxAct);
+  });
+
   const dispatch = useDispatch();
 
   const handleFilterByContinent = (e) => {
@@ -12,6 +23,14 @@ const Filter = () => {
       dispatch(getCountries());
     }
     // console.log(e.target.value);
+  };
+
+  const handleFilterActivities = (e) => {
+    if (e.target.value.trim()) {
+      dispatch(filterByActivities(e.target.value));
+    } else {
+      dispatch(getCountries());
+    }
   };
 
   return (
@@ -32,6 +51,16 @@ const Filter = () => {
         </fieldset>
         <fieldset>
           <legend>Por Actividad</legend>
+          <select name="activities" id="act" onChange={handleFilterActivities}>
+            <option value="">--------</option>
+            {auxAct.map((activity) => {
+              return (
+                <option value={activity.name} key={activity.id}>
+                  {activity.name}
+                </option>
+              );
+            })}
+          </select>
         </fieldset>
       </fieldset>
     </div>

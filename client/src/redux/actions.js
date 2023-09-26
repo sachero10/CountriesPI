@@ -9,6 +9,7 @@ export const CLEAN_COUNTRIES_BY_NAME = "CLEAN_COUNTRIES_BY_NAME";
 export const ORDER_COUNTRIES = "ORDER_COUNTRIES";
 export const ORDER_POPULATION = "ORDER_POPULATION";
 export const FILTER_CONTINENT = "FILTER_CONTINENT";
+export const FILTER_ACTIVITIES = "FILTER_ACTIVITIES";
 
 export const getCountries = () => {
   return async function (dispatch) {
@@ -50,27 +51,36 @@ export const cleanCountriesByName = () => {
 
 export const orderCountries = (orderC) => {
   return function (dispatch) {
-    return dispatch ({
+    return dispatch({
       type: ORDER_COUNTRIES,
       payload: orderC,
     });
-  }
+  };
 };
 
 export const orderCountriesByPopulation = (orderP) => {
   return function (dispatch) {
-    return dispatch ({
+    return dispatch({
       type: ORDER_POPULATION,
       payload: orderP,
     });
-  }
+  };
 };
 
 export const filterByContinent = (continent) => {
-  return async function (dispatch) {
-    return dispatch ({
+  return function (dispatch) {
+    return dispatch({
       type: FILTER_CONTINENT,
       payload: continent,
     });
-  }
+  };
+};
+
+export const filterByActivities = (activity) => {
+  return function (dispatch) {
+    return dispatch({
+      type: FILTER_ACTIVITIES,
+      payload: activity,
+    });
+  };
 };

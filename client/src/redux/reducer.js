@@ -8,20 +8,26 @@ import {
   ORDER_COUNTRIES,
   ORDER_POPULATION,
   FILTER_CONTINENT,
+  FILTER_ACTIVITIES,
 } from "./actions";
 
 const initialState = {
   allCountries: [],
   countryDetail: {},
   activities: [],
-  aux: [],
+  auxCountries: [],
+  auxActivities: [],
   // countriesByName: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_COUNTRIES:
-      return { ...state, aux: action.payload, allCountries: action.payload };
+      return {
+        ...state,
+        auxCountries: action.payload,
+        allCountries: action.payload,
+      };
 
     case GET_COUNTRY_DETAIL:
       return { ...state, countryDetail: action.payload };
@@ -30,7 +36,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, countryDetail: {} };
 
     case GET_ACTIVITIES:
-      return { ...state, activities: action.payload };
+      return {
+        ...state,
+        activities: action.payload,
+        auxActivities: action.payload,
+      };
 
     case GET_COUNTRY_BY_NAME:
       // return {...state, countriesByName: action.payload};
@@ -71,10 +81,16 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allCountries: copy2 };
 
     case FILTER_CONTINENT:
-      let copy3 = state.aux.filter((country) => {
+      let copy3 = state.auxCountries.filter((country) => {
         return country.continent === action.payload;
       });
       return { ...state, allCountries: copy3 };
+
+    case FILTER_ACTIVITIES:
+      let copy4 = state.auxActivities.filter((activity) => {
+        return activity.name === action.payload;
+      });
+      return { ...state, activities: copy4 };
 
     default:
       return { ...state };
