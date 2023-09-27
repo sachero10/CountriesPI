@@ -6,15 +6,15 @@ import {
   filterByActivities,
 } from "../../redux/actions";
 
-const Filter = ({ auxActivities }) => {
-  const [auxAct, setAuxAct] = useState([]);
-
-  useEffect(() => {
-    setAuxAct(auxActivities);
-    console.log(auxAct);
-  });
-
+const Filter = ({ auxAct }) => {
+  // const [auxAct, setAuxAct] = useState([]);
+  console.log(auxAct);
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   setAuxAct(auxActivities);
+  //   console.log(auxAct);
+  // }, []);
 
   const handleFilterByContinent = (e) => {
     if (e.target.value.trim()) {
@@ -51,7 +51,7 @@ const Filter = ({ auxActivities }) => {
         </fieldset>
         <fieldset>
           <legend>Por Actividad</legend>
-          <select name="activities" id="act" onChange={handleFilterActivities}>
+          <select onChange={handleFilterActivities}>
             <option value="">--------</option>
             {auxAct.map((activity) => {
               return (

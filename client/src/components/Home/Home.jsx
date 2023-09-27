@@ -13,6 +13,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
+  const [auxAct, setAuxAct] = useState(auxActivities);
   const [pagina, setPagina] = useState(1); //pag actual
   const porPagina = 10; //cant de paises p/pag
   const maximo = Math.ceil(allCountries.length / porPagina); //cant de pags
@@ -20,13 +21,15 @@ const Home = () => {
   useEffect(() => {
     dispatch(getCountries());
     dispatch(getActivities());
+    setAuxAct(auxActivities);
+    console.log(auxAct);
   }, []);
 
   return (
     <div>
       <SearchBar />
       <Order allCountries={allCountries} />
-      <Filter auxActivities={auxActivities} />
+      <Filter auxAct={auxAct} />
       <h1>PAISES</h1>
       {allCountries.length === 0 ? <h3>No Existe el País...</h3> : <p></p>}
       <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
