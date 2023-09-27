@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   filterByContinent,
@@ -6,15 +6,11 @@ import {
   filterByActivities,
 } from "../../redux/actions";
 
-const Filter = ({ auxAct }) => {
-  // const [auxAct, setAuxAct] = useState([]);
-  console.log(auxAct);
-  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   setAuxAct(auxActivities);
-  //   console.log(auxAct);
-  // }, []);
+const Filter = ({ auxAct, setPagina, setInput }) => {
+  // const [auxAct, setAuxAct] = useState([]);
+
+  const dispatch = useDispatch();
 
   const handleFilterByContinent = (e) => {
     if (e.target.value.trim()) {
@@ -22,6 +18,8 @@ const Filter = ({ auxAct }) => {
     } else {
       dispatch(getCountries());
     }
+    setPagina(1);
+    setInput(1);
     // console.log(e.target.value);
   };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Pagination = ({ pagina, setPagina, maximo }) => {
-  const [input, setInput] = useState(1);
+const Pagination = ({ pagina, setPagina, maximo, input, setInput }) => {
+  // const [input, setInput] = useState(1);
 
   const nextPage = () => {
     setInput(parseInt(input) + 1);

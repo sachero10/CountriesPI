@@ -90,6 +90,7 @@ const rootReducer = (state = initialState, action) => {
       let copy4 = state.auxActivities.filter((activity) => {
         return activity.name === action.payload;
       });
+      console.log(copy4);
       return { ...state, activities: copy4 };
 
     default:
