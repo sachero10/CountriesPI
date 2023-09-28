@@ -87,11 +87,15 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, allCountries: copy3 };
 
     case FILTER_ACTIVITIES:
+      let copy5 = [];
       let copy4 = state.auxActivities.filter((activity) => {
-        return activity.name === action.payload;
+        if (activity.name === action.payload){
+          activity.Countries.forEach((country) => copy5.push(country));
+        } 
+        return;
       });
-      console.log(copy4);
-      return { ...state, activities: copy4 };
+      // console.log(copy5);
+      return { ...state, allCountries: copy5 };
 
     default:
       return { ...state };
