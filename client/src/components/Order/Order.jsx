@@ -1,9 +1,10 @@
+import style from "./Order.module.css";
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
   orderCountries,
   orderCountriesByPopulation,
-  getCountries
+  getCountries,
 } from "../../redux/actions";
 
 const Order = ({ allCountries }) => {
@@ -28,10 +29,10 @@ const Order = ({ allCountries }) => {
   };
 
   return (
-    <div>
-      <fieldset>
-        <legend align="left">Ordenar Países</legend>
-        <fieldset>
+    <div className={style.order}>
+      <fieldset className={style.forder}>
+        <legend>Ordenar Países</legend>
+        <fieldset className={style.name}>
           <legend>Por Nombre</legend>
           <div>
             <select id="orderName" name="orderName" onChange={handleChangeName}>
@@ -41,10 +42,14 @@ const Order = ({ allCountries }) => {
             </select>
           </div>
         </fieldset>
-        <fieldset>
-          <legend>Por Poblacion</legend>
+        <fieldset className={style.population}>
+          <legend>Por Población</legend>
           <div>
-          <select id="orderPopulation" name="orderPopulation" onChange={handleChangePopulation}>
+            <select
+              id="orderPopulation"
+              name="orderPopulation"
+              onChange={handleChangePopulation}
+            >
               <option value="">--------</option>
               <option value="AP">Ascendente</option>
               <option value="DP">Descendente</option>

@@ -1,6 +1,9 @@
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  /* display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: 50% 50%; */
 }

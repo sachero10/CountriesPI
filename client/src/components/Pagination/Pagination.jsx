@@ -16,9 +16,9 @@ const Pagination = ({ pagina, setPagina, maximo, input, setInput }) => {
   const onKeyDown = (e) => {
     if (e.keyCode == 13) {
       //tecla "Enter"
-      setPagina(parseInt(e.target.value));
+      // setPagina(parseInt(e.target.value));
       if (
-        parseInt(e.target.value < 1) ||
+        e.target.value < 1 ||
         parseInt(e.target.value) > maximo ||
         isNaN(parseInt(e.target.value))
       ) {

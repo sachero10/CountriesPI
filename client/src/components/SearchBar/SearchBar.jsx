@@ -15,8 +15,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div className={style.SearchBar}>
-      <input className={style.input}
+    <div className={style.searchBar}>
+      <input
+        className={style.input}
         type="search"
         id="countryName"
         name="countryName"

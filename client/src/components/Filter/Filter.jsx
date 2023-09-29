@@ -1,3 +1,4 @@
+import style from "./Filter.module.css";
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -5,7 +6,6 @@ import {
   getCountries,
   filterByActivities,
 } from "../../redux/actions";
-
 
 const Filter = ({ auxAct, setPagina, setInput }) => {
   // const [auxAct, setAuxAct] = useState([]);
@@ -32,12 +32,16 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
   };
 
   return (
-    <div>
-      <fieldset>
-        <legend align="left">Filtrar Países</legend>
-        <fieldset>
+    <div className={style.filter}>
+      <fieldset className={style.ffilter}>
+        <legend>Filtrar Países</legend>
+        <fieldset className={style.continent}>
           <legend>Por Continente</legend>
-          <select id="filterContinent" name="filterContinent" onChange={handleFilterByContinent}>
+          <select
+            id="filterContinent"
+            name="filterContinent"
+            onChange={handleFilterByContinent}
+          >
             <option value="">-------</option>
             <option value="Africa">Africa</option>
             <option value="Europe">Europa</option>
@@ -47,9 +51,13 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
             <option value="Antarctic">Antártida</option>
           </select>
         </fieldset>
-        <fieldset>
+        <fieldset className={style.activity}>
           <legend>Por Actividad</legend>
-          <select id="filterActivity" name="filterActivity" onChange={handleFilterActivities}>
+          <select
+            id="filterActivity"
+            name="filterActivity"
+            onChange={handleFilterActivities}
+          >
             <option value="">--------</option>
             {auxAct.map((activity) => {
               return (

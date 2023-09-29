@@ -9,7 +9,6 @@ import Order from "../Order/Order";
 import Filter from "../Filter/Filter";
 import { getCountries, getActivities } from "../../redux/actions"; //
 
-
 const Home = () => {
   const dispatch = useDispatch();
 
@@ -31,12 +30,20 @@ const Home = () => {
 
   return (
     <div className={style.home}>
-      <SearchBar />
-      <Order allCountries={allCountries} />
-      <Filter auxAct={auxAct} setPagina={setPagina} setInput={setInput} />
-      <h1>PAISES</h1>
+      <div className={style.inputs}>
+        <SearchBar />
+        <Order allCountries={allCountries} />
+        <Filter auxAct={auxAct} setPagina={setPagina} setInput={setInput} />
+      </div>
+      <h1 className={style.titulo}>PAÍSES</h1>
       {allCountries.length === 0 ? <h3>No Existe el País...</h3> : <p></p>}
-      <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} input={input} setInput={setInput}/>
+      <Pagination
+        pagina={pagina}
+        setPagina={setPagina}
+        maximo={maximo}
+        input={input}
+        setInput={setInput}
+      />
       <Cards pagina={pagina} porPagina={porPagina} />
     </div>
   );
