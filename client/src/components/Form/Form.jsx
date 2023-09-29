@@ -112,6 +112,7 @@ const Form = () => {
           <div>
             <label htmlFor="season">Temporada: </label>
             <select
+              id="season"
               name="season"
               onChange={handleChange}
               required

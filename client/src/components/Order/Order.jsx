@@ -34,7 +34,7 @@ const Order = ({ allCountries }) => {
         <fieldset>
           <legend>Por Nombre</legend>
           <div>
-            <select onChange={handleChangeName}>
+            <select id="orderName" name="orderName" onChange={handleChangeName}>
               <option value="">--------</option>
               <option value="AN">Ascendente</option>
               <option value="DN">Descendente</option>
@@ -44,7 +44,7 @@ const Order = ({ allCountries }) => {
         <fieldset>
           <legend>Por Poblacion</legend>
           <div>
-          <select onChange={handleChangePopulation}>
+          <select id="orderPopulation" name="orderPopulation" onChange={handleChangePopulation}>
               <option value="">--------</option>
               <option value="AP">Ascendente</option>
               <option value="DP">Descendente</option>

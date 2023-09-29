@@ -1,3 +1,4 @@
+import style from "./SearchBar.module.css";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getCountries, getCountryByName } from "../../redux/actions";
@@ -14,8 +15,8 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
-      <input
+    <div className={style.SearchBar}>
+      <input className={style.input}
         type="search"
         id="countryName"
         name="countryName"

@@ -37,7 +37,7 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
         <legend align="left">Filtrar Países</legend>
         <fieldset>
           <legend>Por Continente</legend>
-          <select onChange={handleFilterByContinent}>
+          <select id="filterContinent" name="filterContinent" onChange={handleFilterByContinent}>
             <option value="">-------</option>
             <option value="Africa">Africa</option>
             <option value="Europe">Europa</option>
@@ -49,7 +49,7 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
         </fieldset>
         <fieldset>
           <legend>Por Actividad</legend>
-          <select onChange={handleFilterActivities}>
+          <select id="filterActivity" name="filterActivity" onChange={handleFilterActivities}>
             <option value="">--------</option>
             {auxAct.map((activity) => {
               return (

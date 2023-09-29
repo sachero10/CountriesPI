@@ -1,12 +1,18 @@
+import style from "./Home.module.css";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Cards from "../Cards/Cards";
 import Pagination from "../Pagination/Pagination";
 import SearchBar from "../SearchBar/SearchBar";
 import Order from "../Order/Order";
 import Filter from "../Filter/Filter";
+import { getCountries, getActivities } from "../../redux/actions"; //
+
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const allCountries = useSelector((state) => state.allCountries);
   const auxActivities = useSelector((state) => state.auxActivities);
 
@@ -17,11 +23,14 @@ const Home = () => {
   const maximo = Math.ceil(allCountries.length / porPagina); //cant de pags
 
   useEffect(() => {
+    dispatch(getCountries());
+    dispatch(getActivities());
     setAuxAct(auxActivities);
-  }, []);
+    console.log(auxActivities);
+  }, [dispatch]);
 
   return (
-    <div>
+    <div className={style.home}>
       <SearchBar />
       <Order allCountries={allCountries} />
       <Filter auxAct={auxAct} setPagina={setPagina} setInput={setInput} />

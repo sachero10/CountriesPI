@@ -1,17 +1,18 @@
+import style from "./Nav.module.css";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <div>
-      <Link to="/home">
-        <button>Home</button>
+    <div className={style.nav}>
+      <Link className={style.link} to="/home">
+        <button className={style.button}>Home</button>
       </Link>
       <Link to="/activities">
-        <button>Actividades Turísticas</button>
+        <button className={style.button}>Ver Actividades Turísticas</button>
       </Link>
       <Link to="/form">
-        <button>Crear Act. Turística</button>
+        <button className={style.button}>Crear Actividad Turística</button>
       </Link>
     </div>
   );
