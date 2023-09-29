@@ -1,12 +1,11 @@
-// import React from "react";
-import React, { useEffect } from "react";//
-import { useDispatch } from "react-redux";//
+import style from "./LandingPage.module.css";
+import React, { useEffect } from "react"; //
+import { useDispatch } from "react-redux"; //
 import { Link } from "react-router-dom";
-import { getCountries, getActivities } from "../../redux/actions";//
-
+import { getCountries, getActivities } from "../../redux/actions"; //
 
 const LandingPage = () => {
-  const dispatch = useDispatch();//
+  const dispatch = useDispatch(); //
 
   useEffect(() => {
     dispatch(getActivities());
@@ -15,10 +14,11 @@ const LandingPage = () => {
 
   return (
     <div>
-      <h1>API COUNTRIES</h1>
-      <Link to="/home">
-        <button>Entrar</button>
-      </Link>
+      <body className={style.landing}>
+        <Link to="/home">
+          <button className={style.button}>INGRESAR</button>
+        </Link>
+      </body>
     </div>
   );
 };
