@@ -22,7 +22,7 @@ const SearchBar = () => {
         id="countryName"
         name="countryName"
         onChange={handleChange}
-        placeholder="Buscar País..."
+        placeholder=" Buscar País... "
         autoComplete="off"
       />
     </div>

@@ -5,6 +5,7 @@
   grid-column-start: 2;
   height: 80px;
   font-weight: bolder;
+  font-size: larger;
   color: white;
   text-shadow: 1px 1px 4px black;
   -webkit-text-stroke: 0.5px rgb(189, 189, 189);
@@ -20,13 +21,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border: none;
-  width: 80%;
 }
 
 .activity {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border: none;
+}
+
+.selectContinent {
+  justify-content: center;
+  width: 70%;
+}
+
+.selectActivity {
+  justify-content: center;
+  width: 90%;
 }

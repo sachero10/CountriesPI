@@ -38,6 +38,7 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
         <fieldset className={style.continent}>
           <legend>Por Continente</legend>
           <select
+            className={style.selectContinent}
             id="filterContinent"
             name="filterContinent"
             onChange={handleFilterByContinent}
@@ -54,6 +55,7 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
         <fieldset className={style.activity}>
           <legend>Por Actividad</legend>
           <select
+            className={style.selectActivity}
             id="filterActivity"
             name="filterActivity"
             onChange={handleFilterActivities}
