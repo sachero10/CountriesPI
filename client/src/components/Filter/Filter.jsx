@@ -29,6 +29,8 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
     } else {
       dispatch(getCountries());
     }
+    setPagina(1);
+    setInput(1);
   };
 
   return (

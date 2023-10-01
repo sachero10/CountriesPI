@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "./useForm";
-import styles from "./Form.module.css";
+import style from "./Form.module.css";
 
 const initialForm = {
   name: "",
@@ -15,7 +15,7 @@ const validationsForm = (form, countries, country) => {
   //Expresiones Regulares
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexDifficulty = /^[1-5]{1}$/;
-  const regDurationHs=/^([0-9]|0[0-9]|1[0-9]|2[0-4])$/;
+  const regDurationHs = /^([0-9]|0[0-9]|1[0-9]|2[0-4])$/;
 
   if (!form.name.trim()) {
     //para eliminar los espacios en blanco en ambos extremos
@@ -30,7 +30,8 @@ const validationsForm = (form, countries, country) => {
     errors.difficulty = `El campo "Dificultad" sólo acepta un número del 1 al 5`;
   }
 
-  if(!regDurationHs.test(form.duration.trim())) errors.duration = `El campo "Duración" acepta valores del 0 al 24`
+  if (!regDurationHs.test(form.duration.trim()))
+    errors.duration = `El campo "Duración" acepta valores del 0 al 24`;
 
   if (!form.season) {
     errors.season = `Debe Seleccionar una opción válida para la Temporada`;
@@ -60,11 +61,19 @@ const Form = () => {
   } = useForm(initialForm, validationsForm);
 
   return (
-    <div>
-      <h1>Actividad Turística</h1>
-      <form onSubmit={handleSubmit} noValidate autoComplete="off">
-        <fieldset>
-          <legend align="left">Crear Actividad Turística</legend>
+    <div className={style.formDiv}>
+      <h1 className={style.titulo}>Actividad Turística</h1>
+      <form
+        className={style.form}
+        onSubmit={handleSubmit}
+        noValidate
+        autoComplete="off"
+      >
+        <fieldset className={style.fieldset1}>
+          <legend className={style.legend} align="left">
+            Crear Actividad Turística
+          </legend>
+          <br />
           <div>
             <label htmlFor="name">Nombre: </label>
             <input
@@ -130,8 +139,8 @@ const Form = () => {
           <br />
           <br />
           <div>
-            <fieldset>
-              <legend align="left">
+            <fieldset className={style.fieldset2}>
+              <legend className={style.legend} align="left">
                 Buscar el/los país/es para la Actividad
               </legend>
               <br />
@@ -149,8 +158,13 @@ const Form = () => {
               {errors.country && <span>{errors.country}</span>}
               <br />
               <br />
-              <button onClick={addCountry}>Buscar y Agregar</button>
+              <button className={style.button} onClick={addCountry}>
+                Buscar y Agregar
+              </button>
+              <br />
+              <br />
               <hr />
+              <br />
               {<h4>País/es seleccionado/s:</h4>}
               <ul>
                 {countries.map((country, index) => (
@@ -158,14 +172,24 @@ const Form = () => {
                 ))}
               </ul>
               <br />
-              <button onClick={addArray}>Confirmar País/es</button>
-              <button onClick={removeCountries}>Eliminar Seleccion</button>
+              <button className={style.button} onClick={addArray}>
+                Confirmar País/es
+              </button>
+              <button className={style.button} onClick={removeCountries}>
+                Eliminar Seleccion
+              </button>
             </fieldset>
           </div>
           {/* {console.log(countries)} */}
           <br />
           <br />
-          <input type="submit" value="CREAR ACTIVIDAD" />
+          <input
+            className={style.button}
+            type="submit"
+            value="CREAR ACTIVIDAD"
+          />
+          <br />
+          <br />
         </fieldset>
       </form>
     </div>

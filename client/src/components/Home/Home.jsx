@@ -35,8 +35,12 @@ const Home = () => {
         <Order allCountries={allCountries} />
         <Filter auxAct={auxAct} setPagina={setPagina} setInput={setInput} />
       </div>
+      <br />
+      <br />
       <h1 className={style.titulo}>PAÍSES</h1>
-      {allCountries.length === 0 ? <h3>No Existe el País...</h3> : <p></p>}
+      <br />
+      <br />
+      {allCountries.length === 0 ? <h3 className={style.NoExiste}>No Existe el País...</h3> : <p></p>}
       <Pagination
         pagina={pagina}
         setPagina={setPagina}

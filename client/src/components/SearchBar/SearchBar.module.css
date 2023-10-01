@@ -1,12 +1,10 @@
 .searchBar {
-  display: grid;
-  justify-content: flex-end;
   grid-column-start: 3;
-  /* background-color: green; */
 }
 
 .input {
-  width: 100%;
+  width: 80%;
+  height: 80%;
   margin-top: 5px;
   margin-right: 5px;
   margin-bottom: 5px;

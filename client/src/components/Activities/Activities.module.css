@@ -1,33 +1,17 @@
-.home {
+.activities {
   background-image: url("../../images/img2.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 900px;
+  min-height: 750px;
 }
 
-.titulo,
-.NoExiste {
-  margin: 5px;
-  margin-top: 10px;
+.titulo {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 4px black;
   font-weight: bolder;
   font-size: 50px;
   -webkit-text-stroke: 0.5px rgb(189, 189, 189);
-}
-
-.NoExiste {
-  text-shadow: 1px 1px 4px red;
-  margin-bottom: 50px;
-}
-
-.inputs {
-  display: grid;
-  grid-template-columns: 30% 45% 25%;
-  grid-template-rows: 1fr;
-  height: 130px;
-  /* background-color: aquamarine; */
 }

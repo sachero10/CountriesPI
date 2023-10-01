@@ -1,15 +1,15 @@
+import style from "./CardsActivities.module.css";
 import React, { useState } from "react";
 import CardActivity from "../CardActivity/CardActivity";
 import { useSelector } from "react-redux";
 
 const CardsActivities = (props) => {
   const activities = useSelector((state) => state.activities);
-  
+
   return (
     <div>
-      <div>
-        {activities
-        .map((activity) => {
+      <div className={style.cards}>
+        {activities.map((activity) => {
           return (
             <CardActivity
               key={activity.id}

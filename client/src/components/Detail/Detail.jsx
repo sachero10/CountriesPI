@@ -1,3 +1,4 @@
+import style from "./Detail.module.css";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,40 +14,57 @@ const Detail = () => {
     return () => {
       dispatch(cleanDetail()); //cuando se desmonta el componente
     };
-  }, [id ]); //cuando se actualiza
+  }, [id]); //cuando se actualiza
 
   return (
-    <div>
+    <div className={style.detail}>
       {country ? (
-            <>
-              <h1>Country: {country.name}</h1>
-              <h3>ID: {country.id}</h3>
-              <img src={country.flag} alt="country detail" />
-              <h3>Continent: {country.continent}</h3>
-              <div>
-                <h3>Capital (es): </h3>
-                <ul>
-                <div> {country.capital?.map((capital, index) => (
-                  <li key={index}>{capital}</li>
-                ))}</div>
-                </ul>
-              </div>
-              <h4>Subregion: {country?.subregion}</h4>
-              <h4>Area: {country?.area}</h4>
-              <h4>Population: {country.population}</h4>
-              <div>
-                <h3>Actividades: </h3>
-                <ul>
-                <div> {country.Activities?.map((activity, index) => (
-                  <li key={index}>{activity.name} - Temporada: {activity.season} -
-                  Dificultad: {activity.difficulty} - Duración (hs): {activity.duration}</li>
-                ))}</div>
-                </ul>
-              </div>
-            </>
-          ) : (
-            <h3>Cargando...</h3>
-          )}
+        <>
+          <h1 className={style.name}>Country: {country.name}</h1>
+          <div className={style.info}>
+            <h3 className={style.id}>ID: {country.id}</h3>
+            <img
+              className={style.flag}
+              src={country.flag}
+              alt="country detail"
+            />
+            <h3 className={style.continent}>Continent: {country.continent}</h3>
+            <div className={style.divCapitals}>
+              <h3 className={style.capitalName}>Capital (es): </h3>
+              <ul>
+                <div className={style.capitals}>
+                  {" "}
+                  {country.capital?.map((capital, index) => (
+                    <li key={index}>{capital}</li>
+                  ))}
+                </div>
+              </ul>
+            </div>
+            <h4 className={style.subregion}>Subregion: {country?.subregion}</h4>
+            <h4 className={style.area}>Area: {country?.area}</h4>
+            <h4 className={style.population}>
+              Population: {country.population}
+            </h4>
+            <div className={style.divActivities}>
+              <h3 className={style.activitiesName}>Actividades: </h3>
+              <ul>
+                <div className={style.activities}>
+                  {" "}
+                  {country.Activities?.map((activity, index) => (
+                    <li key={index}>
+                      {activity.name} - Temporada: {activity.season} -
+                      Dificultad: {activity.difficulty} - Duración (hs):{" "}
+                      {activity.duration}
+                    </li>
+                  ))}
+                </div>
+              </ul>
+            </div>
+          </div>
+        </>
+      ) : (
+        <h3>Cargando...</h3>
+      )}
     </div>
   );
 };
