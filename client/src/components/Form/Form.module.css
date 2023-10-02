@@ -73,3 +73,8 @@ span {
   background-color: black;
   color: white;
 }
+
+.difficulty,
+.duration {
+  width: 45px;
+}

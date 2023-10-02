@@ -92,6 +92,7 @@ const Form = () => {
           <div>
             <label htmlFor="difficulty">Dificultad (1-5): </label>
             <input
+              className={style.difficulty}
               type="number"
               id="difficulty"
               name="difficulty"
@@ -107,6 +108,7 @@ const Form = () => {
           <div>
             <label htmlFor="duration">Duración (hs): </label>
             <input
+              className={style.duration}
               type="number"
               id="duration"
               name="duration"

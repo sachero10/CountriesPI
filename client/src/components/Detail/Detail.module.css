@@ -67,3 +67,13 @@
 ul {
   list-style: none;
 }
+
+.noActivities{
+  margin: 5px;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 4px black;
+  font-weight: bolder;
+  -webkit-text-stroke: 0.5px rgb(189, 189, 189);
+  margin-bottom: 50px;
+}

@@ -75,6 +75,7 @@ export const useForm = (initialForm, validateForm) => {
       ...form,
       country: countriesResult,
     });
+    alert(`PAÍSES CONFIRMADOS`);
   };
 
   const addCountry = (e) => {

@@ -28,6 +28,8 @@
   height: 30px;
   margin: 5px;
   font-weight: bolder;
+  border-radius: 10px;
+  border-style: none;
 }
 
 .b {

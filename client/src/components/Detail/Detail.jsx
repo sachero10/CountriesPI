@@ -57,6 +57,7 @@ const Detail = () => {
                       {activity.duration}
                     </li>
                   ))}
+                  {country.Activities?.length === 0 ? <h3 className={style.noActivities}>No hay Actividades Turísticas para el País</h3> : <p></p>}
                 </div>
               </ul>
             </div>

@@ -1,5 +1,5 @@
 import style from "./Filter.module.css";
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   filterByContinent,
@@ -8,8 +8,6 @@ import {
 } from "../../redux/actions";
 
 const Filter = ({ auxAct, setPagina, setInput }) => {
-  // const [auxAct, setAuxAct] = useState([]);
-
   const dispatch = useDispatch();
 
   const handleFilterByContinent = (e) => {
