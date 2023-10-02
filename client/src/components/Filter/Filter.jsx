@@ -1,5 +1,5 @@
 import style from "./Filter.module.css";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   filterByContinent,
@@ -8,14 +8,20 @@ import {
 } from "../../redux/actions";
 
 const Filter = ({ auxAct, setPagina, setInput }) => {
+  const [continent, setContient] = useState("");
+  const [activity, setActivity] = useState("");
+
   const dispatch = useDispatch();
 
   const handleFilterByContinent = (e) => {
     if (e.target.value.trim()) {
+      setContient(e.target.value);
       dispatch(filterByContinent(e.target.value));
     } else {
+      setContient("");
       dispatch(getCountries());
     }
+    setActivity("");
     setPagina(1);
     setInput(1);
     // console.log(e.target.value);
@@ -23,10 +29,13 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
 
   const handleFilterActivities = (e) => {
     if (e.target.value.trim()) {
+      setActivity(e.target.value);
       dispatch(filterByActivities(e.target.value));
     } else {
+      setActivity("");
       dispatch(getCountries());
     }
+    setContient("");
     setPagina(1);
     setInput(1);
   };
@@ -38,6 +47,7 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
         <fieldset className={style.continent}>
           <legend>Por Continente</legend>
           <select
+            value={continent}
             className={style.selectContinent}
             id="filterContinent"
             name="filterContinent"
@@ -55,6 +65,7 @@ const Filter = ({ auxAct, setPagina, setInput }) => {
         <fieldset className={style.activity}>
           <legend>Por Actividad</legend>
           <select
+            value={activity}
             className={style.selectActivity}
             id="filterActivity"
             name="filterActivity"
