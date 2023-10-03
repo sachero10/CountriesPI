@@ -25,14 +25,18 @@ const Home = () => {
     dispatch(getCountries());
     dispatch(getActivities());
     setAuxAct(auxActivities);
-    console.log(auxActivities);
+    // console.log(auxActivities);
   }, [dispatch]);
 
   return (
     <div className={style.home}>
       <div className={style.inputs}>
         <SearchBar />
-        <Order allCountries={allCountries} />
+        <Order
+          allCountries={allCountries}
+          setPagina={setPagina}
+          setInput={setInput}
+        />
         <Filter auxAct={auxAct} setPagina={setPagina} setInput={setInput} />
       </div>
       <br />
@@ -40,7 +44,11 @@ const Home = () => {
       <h1 className={style.titulo}>PAÍSES</h1>
       <br />
       <br />
-      {allCountries.length === 0 ? <h3 className={style.NoExiste}>No Existe el País...</h3> : <p></p>}
+      {allCountries.length === 0 ? (
+        <h3 className={style.NoExiste}>No Existe el País...</h3>
+      ) : (
+        <p></p>
+      )}
       <Pagination
         pagina={pagina}
         setPagina={setPagina}

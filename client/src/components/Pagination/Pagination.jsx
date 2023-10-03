@@ -54,7 +54,6 @@ const Pagination = ({ pagina, setPagina, maximo, input, setInput }) => {
         name="page"
         autoComplete="off"
         value={input}
-        size={1}
       />
       <b className={style.b}> de {maximo} </b>
       <button

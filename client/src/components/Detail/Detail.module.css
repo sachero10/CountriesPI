@@ -4,7 +4,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 850px;
+  min-height: 920px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,7 +68,7 @@ ul {
   list-style: none;
 }
 
-.noActivities{
+.noActivities {
   margin: 5px;
   text-align: center;
   color: white;

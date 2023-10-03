@@ -1,5 +1,5 @@
 import style from "./Order.module.css";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   orderCountries,
@@ -7,25 +7,38 @@ import {
   getCountries,
 } from "../../redux/actions";
 
-const Order = ({ allCountries }) => {
+const Order = ({ allCountries, setPagina, setInput }) => {
+  const [name, setName] = useState("");
+  const [population, setPopulation] = useState("");
+
   const dispatch = useDispatch();
 
   const handleChangeName = (e) => {
     if (e.target.value.trim()) {
+      setName(e.target.value);
       dispatch(orderCountries(e.target.value));
       console.log(allCountries); //
     } else {
+      setName("");
       dispatch(getCountries());
     }
+    setPopulation("");
+    setPagina(1);
+    setInput(1);
   };
 
   const handleChangePopulation = (e) => {
     if (e.target.value.trim()) {
+      setPopulation(e.target.value);
       dispatch(orderCountriesByPopulation(e.target.value));
       console.log(allCountries); //
     } else {
+      setPopulation("");
       dispatch(getCountries());
     }
+    setName("");
+    setPagina(1);
+    setInput(1);
   };
 
   return (
@@ -36,6 +49,7 @@ const Order = ({ allCountries }) => {
           <legend>Por Nombre</legend>
           <div>
             <select
+              value={name}
               className={style.selectName}
               id="orderName"
               name="orderName"
@@ -51,6 +65,7 @@ const Order = ({ allCountries }) => {
           <legend>Por Población</legend>
           <div>
             <select
+              value={population}
               className={style.selectPopulation}
               id="orderPopulation"
               name="orderPopulation"

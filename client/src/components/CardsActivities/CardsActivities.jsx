@@ -9,6 +9,11 @@ const CardsActivities = (props) => {
   return (
     <div>
       <div className={style.cards}>
+        {activities.length === 0 ? (
+          <p className={style.NoActivities}>No hay actividades cargadas...</p>
+        ) : (
+          <></>
+        )}
         {activities.map((activity) => {
           return (
             <CardActivity

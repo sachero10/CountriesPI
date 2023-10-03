@@ -13,13 +13,13 @@ const LandingPage = () => {
   }, []); //
 
   return (
-      <body className={style.landing}>
-        <Link to="/home">
-          <div className={style.wrapper}>
-            <button className={style.button}>INGRESAR</button>
-          </div>
-        </Link>
-      </body>
+    <div className={style.landing}>
+      <Link to="/home">
+        <div>
+          <button className={style.button}>INGRESAR</button>
+        </div>
+      </Link>
+    </div>
   );
 };
 

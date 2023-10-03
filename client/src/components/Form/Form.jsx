@@ -10,7 +10,7 @@ const initialForm = {
   country: [],
 };
 
-const validationsForm = (form, countries, country) => {
+const validationsForm = (form, country) => {
   let errors = {}; //Objeto donde se van a ir cargando los errores de c/campo
   //Expresiones Regulares
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
@@ -82,7 +82,6 @@ const Form = () => {
               name="name"
               value={form.name}
               onChange={handleChange}
-              required //
               onBlur={handleBlur} //cuando el elemento pierde el foco
             />
             <br />
@@ -98,7 +97,6 @@ const Form = () => {
               name="difficulty"
               value={form.difficulty}
               onChange={handleChange}
-              required //
               onBlur={handleBlur}
             />
             <br />
@@ -123,13 +121,13 @@ const Form = () => {
           <div>
             <label htmlFor="season">Temporada: </label>
             <select
+              value={form.season}
               id="season"
               name="season"
               onChange={handleChange}
-              required
               onBlur={handleBlur}
             >
-              <option value="">- - -</option>
+              <option value="">- - - -</option>
               <option value="Verano">Verano</option>
               <option value="Otoño">Otoño</option>
               <option value="Invierno">Invierno</option>
@@ -153,7 +151,6 @@ const Form = () => {
                 name="country"
                 value={country}
                 onChange={handleCountry}
-                required //
                 onBlur={handleBlurCountry}
               />
               <br />

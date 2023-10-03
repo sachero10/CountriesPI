@@ -17,7 +17,6 @@ const initialState = {
   activities: [],
   auxCountries: [],
   auxActivities: [],
-  // countriesByName: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -43,11 +42,9 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case GET_COUNTRY_BY_NAME:
-      // return {...state, countriesByName: action.payload};
       return { ...state, allCountries: action.payload };
 
     case CLEAN_COUNTRIES_BY_NAME:
-      // return { ...state, countriesByName: [] };
       return { ...state, allCountries: [] };
 
     case ORDER_COUNTRIES:
@@ -89,12 +86,11 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_ACTIVITIES:
       let copy5 = [];
       let copy4 = state.auxActivities.filter((activity) => {
-        if (activity.name === action.payload){
+        if (activity.name === action.payload) {
           activity.Countries.forEach((country) => copy5.push(country));
-        } 
+        }
         return;
       });
-      // console.log(copy5);
       return { ...state, allCountries: copy5 };
 
     default:

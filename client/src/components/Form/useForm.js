@@ -29,18 +29,18 @@ export const useForm = (initialForm, validateForm) => {
   const handleBlur = (e) => {
     //manejador del enfoque del cursor
     handleChange(e);
-    setErrors(validateForm(form, countries, country));
+    setErrors(validateForm(form, country));
   };
 
   const handleBlurCountry = (e) => {
     //manejador del enfoque del cursor
     handleCountry(e);
-    setErrors(validateForm(form, countries, country));
+    setErrors(validateForm(form, country));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(validateForm(form, countries, country));
+    setErrors(validateForm(form, country));
     if (Object.keys(errors).length === 0) {
       //devuelve un arreglo con las propiedades del objeto
       createActivity(form);
