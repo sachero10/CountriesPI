@@ -7,9 +7,17 @@ import {
   getCountries,
 } from "../../redux/actions";
 
-const Order = ({ allCountries, setPagina, setInput }) => {
-  const [name, setName] = useState("");
-  const [population, setPopulation] = useState("");
+const Order = ({
+  allCountries,
+  setPagina,
+  setInput,
+  name,
+  setName,
+  population,
+  setPopulation,
+}) => {
+  // const [name, setName] = useState("");
+  // const [population, setPopulation] = useState("");
 
   const dispatch = useDispatch();
 

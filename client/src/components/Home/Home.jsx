@@ -18,6 +18,8 @@ const Home = () => {
   const [auxAct, setAuxAct] = useState(auxActivities);
   const [pagina, setPagina] = useState(1); //pag actual
   const [input, setInput] = useState(1); //Entrada-Pag Actual
+  const [name, setName] = useState(""); //
+  const [population, setPopulation] = useState(""); //
   const porPagina = 10; //cant de paises p/pag
   const maximo = Math.ceil(allCountries.length / porPagina); //cant de pags
 
@@ -36,6 +38,10 @@ const Home = () => {
           allCountries={allCountries}
           setPagina={setPagina}
           setInput={setInput}
+          name={name}
+          setName={setName}
+          population={population}
+          setPopulation={setPopulation}
         />
         <Filter auxAct={auxAct} setPagina={setPagina} setInput={setInput} />
       </div>
