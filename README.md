@@ -66,8 +66,6 @@ Utilice el administrador de paquetes npm para instalar. (Recuerde usar este coma
 
 -BackEnd: Dentro ./server:
    ```npm start```
-   
----
 
 -FrontEnd: Dentro ./client:
    ```npm run dev```
